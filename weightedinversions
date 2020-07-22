@@ -1,0 +1,96 @@
+LoadPackage("biogap");
+
+
+#The only input is the number of regions and it converts all possible 
+#inversions into ordered lists of adjacent transpositions.
+
+
+LibraryConstruction:=function(regions)
+
+local cycleal,libal,a,i,j,k,libal2,libal3;
+
+cycleal:=AssociativeList();;
+libal:=AssociativeList();;
+libal2:=AssociativeList();;
+libal3:=AssociativeList();;
+
+for i in [1..(regions-1)] do
+	for j in [i+1..regions] do
+	Assign(cycleal,(i,j),[]);
+
+	for k in [0..(j-i-1)] do
+		Append(cycleal[(i,j)],[(i+k,i+k+1)]);
+		od;
+
+	for k in [1..(Length(cycleal[(i,j)])-1)] do
+		Append(cycleal[(i,j)],[(j-k-1, j - k)]);
+		od;
+	#for k in [1..(regions-3)] do
+	#	Append(al[(i,j)],[(regions-k,regions-k-1)]);
+	#	od;
+
+		od;
+		od;
+
+for j in [2..(regions-1)] do
+	for i in [1..regions] do
+		if i+j <= regions then 
+			if i+1 = i+j-1 then
+			Assign(libal,[i,i+j],[(i,i+j)]);
+			elif i+1 < i+j-1 then
+			Assign(libal,[i,i+j],[(i,i+j),[i+1,i+j-1]]);
+			else
+			Assign(libal,[i,i+j],[(i,i+j)]);
+			fi;
+		fi;	
+
+			od;
+			od;
+
+for a in Keys(libal) do
+	for i in [1..Length(libal[a])] do
+		if libal[a][i] in Keys(libal) then
+			libal[a][i]:=libal[libal[a][i]];
+			#else
+			#libal[a][i]:=(libal[a][i][1],libal[a][i][2]);
+			fi;
+		od;
+	od;
+
+# for a in Keys(libal) do 
+# 	if IsList(libal[a][Length(libal[a])]) then
+# 		libal[a][Length(libal[a])]:=(libal[a][Length(libal[a])][1],libal[a][Length(libal[a])][2]);
+# 	fi;
+# od;
+
+
+for a in Keys(libal) do
+	Assign(libal2,a,Flat(libal[a]));;
+	od;
+
+
+
+
+for a in Keys(libal2) do 
+	if IsInt(libal2[a][Length(libal2[a])]) then 
+		libal2[a][Length(libal2[a]) - 1]:=((libal2[a][Length(libal2[a])-1]),libal2[a][Length(libal2[a])]);
+	Remove(libal2[a]);
+	fi;
+	od;
+
+for a in Keys(libal2) do
+	for i in [1..Length(libal2[a])] do
+		libal2[a][i]:=cycleal[libal2[a][i]];
+		od;
+	#libal2[a]:=Flat(libal2[a]);
+	od;
+
+for a in Keys(libal2) do
+	Assign(libal3,a,Flat(libal2[a]));;
+	od;
+
+return libal3;	
+
+end;
+
+

@@ -1,0 +1,47 @@
+\documentclass[KB-for-Reversal-Distance]{subfiles}
+\begin{document}
+\begin{theorem}
+The following rewriting system is confluent.
+\begin{align*}
+\tij{i, i+1}\tij{i, i+1} &\rightarrow \epsilon & 1 \leq i < n \\
+\tij{p, p+1}\tij{p-1, p} \hdots \tij{i+1, i+2}\tij{i, i+1} \tij{p, p+1} &\rightarrow \tij{p-1, p}\tij{p, p+1}\tij{p-1, p}\tij{p-2, p-1} \hdots \tij{i+1, i+2}\tij{i, i+1} & i < p < n \\
+\tij{i, i+1}\tij{p, p+1} &\rightarrow \tij{p, p+1}\tij{i, i+1} & p < i-1 \\
+\end{align*}
+
+\end{theorem}
+\begin{proof}
+We will establish confluence by testing critical pairs.
+\begin{enumerate}
+\item $(\tij{p, p+1}\tij{p, p+1} \rightarrow \epsilon, \quad \tij{p, p+1}\tij{p-1, p}\tij{p, p+1} \rightarrow \tij{p-1,p}\tij{p,p+1}\tij{p-1,p})$
+
+Critical pair : $(\tij{p, p+1}\tij{p-1,p}\tij{p,p+1}\tij{p-1,p}, \quad \tij{p-1, p}\tij{p, p+1} )$.
+Rewriting :
+\[
+\underline{\tij{p, p+1}\tij{p-1,p}\tij{p,p+1}}\tij{p-1,p} \rightarrow \tij{p-1,p}\tij{p,p+1}\underline{\tij{p-1,p}\tij{p-1,p}} \rightarrow \tij{p-1,p}\tij{p,p+1}
+\]
+
+\item $(\tij{p, p+1}\tij{p, p+1} \rightarrow \epsilon, \quad  \tij{p, p+1}\tij{q, q+1} \rightarrow \tij{q, q+1}\tij{p, p+1}) $ where $q < p$.
+
+Critical pair : $(\tij{p, p+1} \tij{q, q+1} \tij{p, p+1}, \quad \tij{q, q+1})$.
+
+Rewriting :
+\[
+\underline{\tij{p, p+1} \tij{q, q+1}} \tij{p, p+1} \rightarrow \tij{q, q+1}\underline{\tij{p,p+1}\tij{p,p+1}} \rightarrow \tij{q, q+1}.
+\]
+
+\item $(\tij{i,i+1}\tij{i-1, i}\tij{i, i+1} \rightarrow \tij{i-1,i}\tij{i,i+1}\tij{i-1,i}, \quad \tij{i, i+1}\tij{p, p+1} \rightarrow \tij{p, p+1}\tij{i, i+1})$ where $p < i-1$.
+
+Critical pair $\tij{i,i+1}\tij{i-1, i}\tij{p, p+1}\tij{i, i+1}, \quad \tij{i-1,i}\tij{i,i+1}\tij{i-1,i}\tij{p, p+1}$
+
+Case 1 : $p=i-2$
+
+$\tij{i,i+1}\tij{i-1, i}\tij{i-2, i-1}\tij{i, i+1}, \quad \tij{i-1,i}\tij{i,i+1}\tij{i-1,i}\tij{i-2, i-1}$
+
+Case 2 : $p < i-2$
+Both words can be rewritten as $\tij{p, p+1}\tij{i-1,i}\tij{i, i+1}\tij{i-1, i}$. 
+
+Other cases can be similarly checked.
+\end{enumerate}
+\end{proof}
+
+\end{document}

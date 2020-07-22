@@ -1,0 +1,286 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+\usepackage{natbib}
+\newtheorem{definition}{Definition}
+\usepackage{booktabs,tabularx}
+\begin{document}
+
+\section{Motivation - Dehn Presentations}
+\begin{definition}[Dehn Presentation]
+\label{def:dehn}
+A Dehn presentation for a group $G$ is a presentation of the form $G = \left<S|R\right>$ where $S$ is a finite set of generators and $R$ a finite set of relations such that if $w \in F_S$, with $l(w) \geq 1 $, and $w \underset{G}{=} 1$, then there exists $r \in R, r = uv$ where $l(u)>l(v)$ (where $l$ is the length function) and $u$ is a subword of $w$. 
+\end{definition}
+Groups which admit Dehn presentations have solvable word problems. All hyperbolic groups (and hence all finite groups) admit a Dehn presentation.
+
+The following idea is motivated by Dehn presentations. It is possible that the Dehn presentation of our group plays no role here, and it is also possible that we are able to generalize the idea of a Dehn presentation.
+
+The notation of a weighted length of a group element is discussed also in \citep{abels2004reductive}. I reproduce their definition here, because it is very nice and usable. 
+
+\begin{definition}[Weighted word length]
+\label{def:wwl}
+Let $\Sigma$ be the set of generators of group $G$. Let $\omega$ be a bounded function $\omega:\Sigma \rightarrow (0,\infty)$ on $\Sigma$. A weighted word length of a group element $g \in G$ is defined as 
+\[l_{\Sigma.\omega}(g):=inf \{\sum_{i=1}^{t}{\omega(g_i)} \mid g_1^{\epsilon_1}g_2^{\epsilon_2} \hdots g_t^{\epsilon_t}=g, g_i \in \Sigma, \epsilon_i = \pm 1\}.\]
+Weighted word length of the identity $e$ is defined to be $0$. 
+\end{definition}
+%Establish that this finite, or that we can work with a finite subset.
+Note that for any $g \in G$, the set of all words that equal $g$ may well be infinite. However, if we make an additional assumption that the weight assigned to the coxeter generators is the minimum of the weights assigned to elements of $\Sigma$, then we only ever have to deal with a finite subset of the set of all words. This is because the Coxeter length $k$ of $g$ is an upper bound on $l_{\Sigma,\omega}(g)$. With the additional assumption that all other generators have greater weight, we only need to consider the words that contain less than $k$ letters.
+
+\begin{definition}[Weighted word metric]
+ \[d_{\Sigma,\omega}(g,h)=l_{\Sigma,\omega}(g^{-1}h).\]
+\end{definition}
+
+\citep{abels2004reductive} assert that $d_{\Sigma,\omega}$ is a psuedometric ( a psuedometric satisfies all the conditions of being a metric except that the distance can be 0 between non-identical elements). However I think that $d_{\Sigma,\omega}$ is a metric. To see this, observe that if $d_{\Sigma,\omega}(g,h)=0$, then the infimum of the sum of weights of all expressions that equal $g^{-1}h$ is 0. That is, $g^{-1}h=e$. Hence, $g = h$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lower Bound discussion}
+\[S := \{s_i=(i,i+1) \mid 1 \leq n-1\}.\]
+
+\[\Sigma := \{t_{ij} \mid 1 \leq i < j \leq n\}.\]
+
+$\omega$ and $l_{\Sigma,\omega}$ are as in the definition \ref{def:wwl}. $l_{S}(g)$ is the length of a group element $g$ with respect to S (so just the Coxeter length of $g$).  
+
+Let $C=max\{\omega(s_i) \mid s_i \in S\}$. Then it is evident that 
+\[l_{\Sigma,\omega}(g) \leq C l_S(g).\]
+
+In fact we assume that the weight of a generator is related to the number of regions it moves. Hence all the coxeter generators have the same weight $C$.
+
+To get a lower bound on $l_{\Sigma,\omega}(g)$, define
+\[C^{\prime} := max \{l_S(t_{ij}) \mid t_{ij} \in \Sigma\}.\]
+
+Let  $l_{\Sigma,\omega}(g) = k$ and let $t_1 t_2 \hdots t_p$ be an expression for $g$ such that $t_i \in \Sigma$ and $\sum_{i=1}^{p}{\omega(t_i)} = k$. Then
+
+\begin{align*}
+l_S(g) &= l_S(t_1 t_2 \hdots t_p) \\
+& \leq l_S(t_1) + l_S(t_2) + \hdots + l_S(t_p) \\
+& \leq C^{\prime}p \\
+& = C^{\prime} l_{\Sigma}(g).
+\end{align*}
+$l_{\Sigma}(g)$ is the length of the element $g$ w.r.t the generating set $\Sigma$. If we make the additional assumption that the weight of each generator in $\Sigma$ is more than $1$, then we can conclude that,
+\[l_S(g) \leq C^{\prime}l_{\Sigma}(g) \leq C^{\prime}l_{\Sigma, \omega}(g).\]
+Hence 
+\[\frac{1}{C^{\prime}}l_S(g) \leq l_{\Sigma,\omega}(g) \leq C l_S(g).\]
+
+Example. Let $n$ be 5. Then $S$ is the set of Coxeter generators and $\Sigma$ is
+\[\Sigma:=\{(1,2),(2,3),(3,4),(4,5),(1,3),(2,4),(3,5),(1,4)(2,3),(2,5)(3,4),(1,5)(2,4)\}.\]
+
+Let $\omega(t_{ij})=j-i$. Then $C=1$ and $C^{\prime}=10$ and,
+\[\frac{1}{10}l_S(g) \leq l_{\Sigma,\omega}(g) \leq l_S(g).\]
+
+I realise now that this is a pretty useless lower bound. A more useful bound many be dervied from the number of breakpoints. Since an inversion can remove at most 2 breakpoints, the minimum number of moves needed to sort a permutation $g$ is half of the number of breakpoints in $g$.
+
+A note on upper bound -  the reversal diameter of $S_n$ is $n - 1$ when all inversions are allowed. Therefore
+\[l_{\Sigma,\omega}(g) \leq K(n-1),\]
+where $K$ is the maximum weight over $\Sigma$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{A different take}
+The following discussion is borrowed from \citep*{abels2004reductive}.
+\begin{definition}[Coarse path pseudometric] \citep*{abels2004reductive}
+A psuedometric $d$ on a set $X$ is called a coarse path pseudometric if there is a real number $C$ such that for every pair of points $x,y \in X$, there is a squence $x=x_0,x_1,\hdots,x_t=y$ for which $d(x_{i-1},x_i) \leq C$ for $i=1,\hdots,t$ and
+\[d(x,y) \geq \sum_{i=1}^{t}{d(x_{i-1},x_i)} - C.\]
+\end{definition}
+
+It is easy to see that the weighted metric derived from $l_{\Sigma,\omega}$ is a coarse path psuedometric. For any pair $g,h \in S_{n}$ we can find a sequence of $s_i \in S$ such that the above happens. $\sum_{i=1}^{t}{d(x_{i-1},x_i)} \geq l_S(w_0)$ where $w_0$ is the longest Coxeter element. Let $C = min\{\omega(t_{ij}) \mid |i-j|>1\}$. Then,
+\begin{align}\label{equn:lb}
+d(x,y) \geq \sum_{i=1}^{t}{d(x_{i-1},x_i)} - C \geq l_S(w_0) -C.
+\end{align}
+
+
+Let $\Gamma = B_{l_{\Sigma,\omega}}(e,l_S(w_0) -C)$. Then clearly, $\Gamma$ is a generating set for $S_n$.
+
+Let $d_1(g,h)=l_{\Sigma,\omega}(g^{-1}h)$ and $d_2(g,h)=l_{\Gamma}(g^{-1}h)$. Since $\Gamma$ is a generating set for $S_n$, for any $g \in G$, there exist $g_1,g_2,\hdots,g_t \in \Gamma$ such that $g=g_1g_2 \hdots g_t$. Because of equation \ref{equn:lb},
+
+\[d_1(e,g) \geq \sum_{i=1}^{t}{d_1(g_{i-1},g_i)} - C^{\prime},\]
+
+where $C^{\prime}=l_S(w_0) -C$. We can assume that $d(g_{i-1},g_i)+d(g_i,g_{i+1}) > C$ since if it is not, we can combine the factors so that this happens. Thus,
+\[d_1(e,g) \geq \frac{t-1}{2}C^{\prime} - C^{\prime}.\]
+
+Since $t > l_{\Gamma}(g)$, we have that
+\[d_1(e,g) \geq \frac{l_{\Gamma}(g)-1}{2}C^{\prime} - C^{\prime}.\]
+On the other hand, suppose $l_{\Gamma}(g)=s$, that is $g=g_1g_2 \hdots g_s$, $g_i \in \Gamma$. Then,
+\begin{align*}
+l_{\Sigma,\omega}(g) &\leq l_{\Sigma,\omega}(g_1) + l_{\Sigma,\omega}(g_2) + \hdots + l_{\Sigma,\omega}(g_s) \\
+& \leq C^{\prime} s
+& = C^{\prime} l_{\Gamma}(g).
+\end{align*}
+Therefore, \[\frac{l_{\Gamma}(g)-1}{2}C^{\prime} - C^{\prime} \leq l_{\Sigma,\omega}(g) \leq C^{\prime} l_{\Gamma}(g).\]
+
+The upshot of this is that if we augment the generating set and are able to calculate length in the augmented generating set, then we have a lower bound on the weighted length. 
+%However, for the category of weight assigment functions such that $w(gh) \leq w(g)+w(h)$, the above argument can still be adapted and lower bounds obtained easily. \citet{pinter2002genomic} do categorise weight functions according to whether they are additive ($w(x)+w(y)=w(x+y)$), subadditive ($w(x)+w(y) > w(x+y)$) or superadditive ($w(x)+w(y)< w(x+y)$), although I am not clear on what $x+y$ mean when $x$ and $y$ are ``reversals of length l'' (i.e. if they mean permutation multiplication). 
+\subsection{Other considerations}
+ 
+ We might also be able to obtain lower bounds on the weighted distance. E.g. GRIMM distance is already a lower bound, since GRIMM uses all inversions and they all carry weight $1$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The key idea}
+All notation is as in Andrew's notes.
+The objective is to find a minimal weight expression for a group element $g$ where the set of generators $\Sigma$ carry some weight. 
+
+
+
+In order to do this we proceed as follows.
+
+Step 1. Build a library $\mathcal{L}_>$ of relations of the form 
+\[ \mathcal{L}_> = \left\{ (u_1,v_1), (u_2,v_2), \ldots \right\} \qquad  where \qquad  l(u_i) > l(v_i),\]
+with the property that if $w_1 w_2 \hdots w_n$ is an expression for $g$ that does not have minimal weight, then $w_1 w_2 \hdots w_n$ has a subword $u_i \in \mathcal{L}_>[1,]$. 
+
+A key thing is to establish that such a library can be built. See section~\ref{sec:lib_existence} for a comment on this.
+Furthermore, we have another library $\mathcal{L}_{=}$ available: 
+\[ \mathcal{L}_{=} = \left\{ (u_1,v_1), (u_2,v_2), \ldots \right\} \qquad  where \qquad  l(u_i) = l(v_i).\]
+In addition, we have available an algorithm to determine a minimal expression for any group element in terms of $2$-inversions.
+
+With all these things in place, here is an algorithm to find a minimal weight expression for $g$.
+
+\begin{algorithm}
+ \SetAlgoLined
+ \KwIn{A minimal expression $E$ for $g$ in terms of 2 - inversions}
+ \KwData{$\mathcal{L}_{>}$,$\mathcal{L}_{=}$}
+ \KwResult{a minimal weight expression for $g$.}
+ \While{$E$ contains a subword $u_i$ in $\mathcal{L}_{>} \bigcup \mathcal{L}_{=}$}
+ {
+   Replace $u_i$ with $v_i$ in $E$\;
+ }
+ \caption{Determine minimal weight expression for group element $g$.}\label{algo:minWeight1}
+\end{algorithm}
+The algorithm terminates when there exists no $u_i$ in $W$. This results in a (local) minimum.
+since scanning for a subword in $E$ might lead to several choices. Disjoint substitutions seem to commute, however when faced with 2 potential substitutions with overlapping regions of influence the decision affects future substitutions. Thus making arbitrary choices may lead one into a local ditch. We propose exploring all the choices - there may not be that many!
+
+
+\textbf{Questions}
+\begin{enumerate}
+\item Can we construct $\mathcal{L}_{>}$ and $\mathcal{L}_{=}$ such that they have the desired properties?
+\item Does the above algorithm ensure a global maximum? 
+\item Could attaining a global minimum require some substitutions that temporarily increase word length? This could be a pitfall, for our algorithm only ever goes down or sideways, and we are not making an upward movement.
+\item Can we then answer the above question in negative? That would be a useful contribution. Andrew seems to think that an inductive argument might do the trick.
+\item Is it computationally feasible to explore all choices?
+\end{enumerate} 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Existence of $\mathcal{L}_{>}$}
+\label{sec:lib_existence}
+Since we are dealing with finite groups, we are dealing with hyperbolic groups. The group $G$ of interest therefore has Dehn's presentation. That is, it has a presentation $P=\left< \Sigma \mid R \right>$ with the properties mentioned in the definition~\ref{def:dehn}. The implication of having a Dehn's presentation is that we can move around in the set of words that equal $g$, using relators from $P$. 
+
+For $g \in G$, let $W(g)=\{g_1^{\epsilon_1}g_2^{\epsilon_2} \hdots g_t^{\epsilon_t}=g, g_i \in \Sigma, \epsilon_i = \pm 1\}$. We will denote $(w)r_i$ to indicate that the relator $r_i \in R$ is being used to replace the suffix $v_i$ with prefix $u_i$ in $w$. Then, we claim that for any $w_1,w_2 \in W(g)$, there exists a sequence $r_1,r_2 \hdots r_m$ such that $(w_1)r_1 r_2 \hdots r_m = w_2$. If this is not the case, then $w_2^{-1}w_1 \underset{G}{=} 1$ but there is no sequence of relators that will reduce it to $1$. This contradicts the fact that $G$ has Dehn's presentation.
+
+Thus beginning with an expression for $g$ in terms of the coxeter generators, it is possible to get to the expression that minimizes the weight using only the replacements. Whether this particular algorithm will get us to that expression is a different question.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constructing $\mathcal{L}_{>}$ and $\mathcal{L}_{=}$}
+
+
+\begin{algorithm}
+ \SetAlgoLined
+ \KwOut{$\mathcal{L}_{>}$,$\mathcal{L}_{=}$}
+ \ForEach{$t_{1j} \in \Sigma$}
+ {
+    $t_{1j}=(1,j)(2,j-1) \hdots$ \;
+    $r:=(1,j)(2,j-1) \hdots$ \;
+    \While{$r$ does not contain only $2$-inversions }{
+     Add $t_{1,j}r^{-1}$ to $L$ \;
+     Replace the first instance of a $j$-inversion with an equivalent product of $2$-inversions \;
+    }
+    \tcc{$r$ is now a $2$-inversion geodesic.} 
+     $R=$ { All $2$-inversion geodesics equal to $r$}  \tcc*{Obtained by applying braid and commutative relations} \;
+     \ForEach{$r_{k}$ in $R$}
+     {
+      Add $t_{1,j}r_{k}^{-1}$ to $L$ \;
+     }
+  }
+  \ForEach{$l$ in $L$}
+  {
+    \ForEach{$1< j < length(l)$}
+    {
+      \If{$weight(l_{i,j}) = weight(l_{j+1,})$}
+      {
+        Add $[l_{i,j},l_{j+1,}]$to $\mathcal{L}_{=}$ \;
+      }\ElseIf{$weight(l_{i,j}) > weight(l_{j+1,})$}
+      {
+        Add $[l_{i,j},l_{j+1,}]$to $\mathcal{L}_{>}$  \;     
+      }\Else{
+        Add $[l_{j+1,},l_{i,j}]$to $\mathcal{L}_{>}$  \;   
+      }
+    }
+  }
+\end{algorithm}
+Afetr working on this, we realised this brute force is not going to work. The number of equivalent words grows crazily. See sequence A005118 on OEIS. But then, do we really need all the geodesics? Since we want to tie the weight of an inversion with the number of region it acts on, the weight of an expression in 2-inversions is not going to change if it is written differently. 
+
+% \begin{definition}{Subword}
+% Let $w=s_1s_2\hdots s_q$ be a word in the generators $s_i$ of $S_n$. A subexpression of $s_1s_2\hdots s_q$ is a word of the form 
+% \[s_{i_1}s_{i_2}\hdots s_{i_k}, 1 \leq i_1 \leq i_2 \hdots i_k \leq q.\]
+% \end{definition}
+% That is, it is subword in the usual sense except that the indices may not be contiguous, but they appear in the same order in both expressions.
+
+A revised algorithm to determine a minimal weight expression for $g$ is in \ref{algo:minWeight2} and involves an additional step compared to that laid out in \ref{algo:minWeight1}. 
+\begin{algorithm}
+ \SetAlgoLined
+ \KwIn{A minimal expression $E$ for $g$ in terms of 2 - inversions}
+ \KwData{$\mathcal{L}_{>}$,$\mathcal{L}_{=}$,$w_o$}
+ \KwResult{a minimal weight expression for $g$.}
+ \If{E is not a subword of $w_o$}
+ {
+  Let $E^{\prime}$ be the lexicographically smallest reduced expression for $g$ \;
+  $E^{\prime} \rightarrow E$
+ }
+ \While{$E$ contains a subword $u_i$ in $\mathcal{L}_{>} \bigcup \mathcal{L}_{=}$}
+ {
+   Replace $u_i$ with $v_i$ in $E$\;
+ }
+ \caption{Determine minimal weight expression for group element $g$.}\label{algo:minWeight2}
+\end{algorithm}
+
+\begin{algorithm}
+ \SetAlgoLined
+ \KwOut{$\mathcal{L}_{>}$,$\mathcal{L}_{=}$}
+ \ForEach{$t_{1j} \in \Sigma$}
+ {
+  Write $t_{1j}$ as a product  $w=s_1 s_ 2 \hdots s_k$ where $s_i$ are 2-inversions and $w$ is the lexicographically smallest reduced expression for $t_{1j}$ \;
+  \For{$i \in \{k,k-1,\hdots 1\}$}
+  {
+   \If{$weight(t_{1j} s_k \hdots s_i) = weight(s_1 \hdots s_{i+1}) $}
+   {
+    Add $(t_{1j}s_k \hdots s_i,s_1 \hdots s_{i+1})$ to $L_{=}$
+    }\ElseIf{$weight(t_{1j}s_k \hdots s_i) < weight(s_1 \hdots s_{i+1}) $}{
+      Add $(t_{1j}s_k \hdots s_i,s_1 \hdots s_{i+1})$ to $L_{<}$
+    }\Else{
+     Add $(s_1 \hdots s_{i+1},t_{1j}s_k \hdots s_i)$ to $L_{<}$
+    } 
+  }
+ }
+\caption{Construction of the libraries.}\label{algo:libconst}
+\end{algorithm}
+The next question of course is whether the lexicographically smallest reduced expressions for any $g \in G$ can be found (hopefully easily). The answer is yes. See page 9 of \cite{green2001characters}.
+
+Further questions - can we guarantee that starting with any reduced expression for an element $g$, we could get to the same minimal value? Probably yes. It is plausible that of $\mathcal{L}_{<}$ is suitably constructed, then for any reduced expression for $g$, at each step we can find replacements with the same drop in weight.
+
+
+
+\section{Other useful ideas}
+Pedro suggested that we might consider assigning weights to 2-cycles (rather than $j$-inversions) and work with that.
+
+Also, it is also probably obvious but worth noting that this problem is interesting only when the weight assigned to a $j$-inversion is less than its Coxeter length, since otherwise a $j$-inversion would never be chosen as an alternative to an equivalent sequence of Coxeter generators.
+
+\section{Test Results}
+\begin{table}[ht]
+  \centering
+  \begin{tabularx}{\linewidth}{lcX}
+  \toprule
+  \multicolumn{3}{l}{n = 5} \\
+  \midrule
+  Weights & Number of failed cases & Failed cases  \\
+  \midrule
+  \{1, 2, 3, 4\} & 8 &  54312, 45321, 45213, 43512, 53421, 54231, 35412, 45132\\
+  \{1, 4, 3, 2\} & 8 &  54312, 45321, 45213, 43512, 53421, 54231, 35412, 45132 \\
+  \{1, 2, 2, 2\} & 34 & 52341, 25341, 51342, 42351, 52314, 15342, 43152, 35214, 54312, 45321, 34512, 45123, 45312, 34215, 43125, 45213, 43512, 25413, 41532, 15423, 14532, 51423, 24531, 53421, 54231, 54123, 34521, 42315, 53124, 34251, 45231, 53412, 35412, 45132 \\
+  \{1, 5, 5, 5\} & 7 & 54312, 45321, 45312, 53421, 54231, 45231, 53412 \\
+  \{1, 5, 5, 50\} & 0 & \\
+  \{1, 5, 50, 5\} & 13 & 54312, 45321, 45312, 53241, 54213, 43521, 53421, 54231, 35421, 54132, 45231, 53412, 52431 \\
+  \{1, 50, 5, 5\} & 7  & 54312, 45321, 45312, 53421, 54231, 45231, 53412 \\
+  \midrule
+  \multicolumn{3}{l}{n = 6} \\
+  \midrule
+  \{1, 2, 3, 4, 5\} & 142 & \\
+
+  \end{tabularx}
+\end{table}
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{wi}
+\end{document}

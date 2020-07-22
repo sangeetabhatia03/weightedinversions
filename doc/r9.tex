@@ -1,0 +1,47 @@
+\documentclass[worked-example]{subfiles}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% R9, R3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\[
+t_{34} t_{23} t_{34} \rightarrow t_{23} t_{34} t_{23}; \quad
+t_{34}^2 \rightarrow \epsilon
+\]
+
+\[
+\begin{array}{ccccc}
+A & B & U & D & E \\
+\midrule
+t_{34}t_{23} & t_{34} & t_{34} & \epsilon & t_{34}\\
+\end{array}
+\]
+TEST($t_{34}t_{23}, t_{23} t_{34} t_{23}t_{34}$)
+
+\[
+t_{23} \underline{t_{34} t_{23}t_{34}}  \rightarrow \underline{t_{23} t_{23}} t_{34}t_{23} \rightarrow t_{34}t_{23}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% R9, R7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\[
+t_{34} t_{23} t_{34} \rightarrow t_{23} t_{34} t_{23}; \quad
+t_{34} t_{12} \rightarrow t_{12} t_{34}
+\]
+
+\[
+\begin{array}{ccccc}
+A & B & U & D & E \\
+\midrule
+t_{34}t_{23} & t_{34} & t_{34} & \epsilon & t_{12}\\
+\end{array}
+\]
+TEST($t_{34}t_{23}t_{12} t_{34}, t_{23} t_{34} t_{23}t_{12}$)
+\[
+\underline{t_{23} t_{34} t_{23}}t_{12} \rightarrow t_{24} t_{12}.
+\]
+\[
+\underline{t_{34}t_{23}}t_{12} t_{34} \rightarrow t_{23} t_{24} t_{12} t_{34}.
+\]
+ADD((R18) $t_{23} t_{24} t_{12} t_{34} \rightarrow t_{24} t_{12}$)
+\end{document}

@@ -1,0 +1,22 @@
+Sangeeta
+Stuart
+Attila
+Volker
+Cheryl P ?
+Andrew
+
+
+Paper:
+
+Library of relations, heuristic weight reduction algorithm that reaches a local minimum.
+
+Novelty: Cayley graph approach and group relations.  Starting with an existing path and reducing its weight.
+
+Conjecture: it reaches the global minimum.
+
+Test: using another graph tool with weighted path-length.  Extremities of weightings: 2-inversion weight (-> Coxeter length) and uniform weights (GRIMM).
+
+
+
+
+

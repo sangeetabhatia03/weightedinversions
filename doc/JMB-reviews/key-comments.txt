@@ -1,0 +1,75 @@
+Weighted inversions JMB referee comments.  Responses indented following each comment:
+
+Referee 1:
+---------
+
+Also, the paper would profit enormously from restructuring the introduction by a substantial reference to Chapter 9 (“Genome Rearrangement”) of Durrett’s book “Probability Models for DNA Sequence Evolution” (2nd ed., Springer, New York, 2008).
+
+	Maybe look at this later...
+
+Referee 3 (who recommended acceptance):
+---------
+
+p2L43: The statement "...all inversions were shorter than expected..." is unclear in its meaning. Consider rewording.
+
+	Seems clear to me, going to leave this.
+
+p3L53: At this point it would be useful for the reader if the author's cited the original Knuth-Bendix work as well as provide a pointer towards an approachable reference for the general theory that is to be drawn upon.
+
+	added link to original there but found a 1970 ref of the same title.  Not sure which is correct - we have a 1983 ref.
+
+p4L56: Here it is worthwhile to define S_n (for the reader for which this is not immediately obvious).
+
+	added comment that it's `the symmetric group'.
+
+p5L2: For some readers it will be very useful to define in symbols what is meant by the generator notation <I>. 
+
+	Not sure what is wanted here so I've massaged the wording but no symbols.
+
+p5L8: "a sequence of elements in S". Are we restricting to a *finite* sequence/word? Also, is $e\notin S$ implicit?
+
+	`finite' added. `Non-trivial' added.
+
+p5L43: Is it worth writing $t\in \mathbb{N}$ inside the curly brackets?
+
+	done.
+
+p6L19: I can't see what the $G$ appears here under the equality sign in $uv^{-1}=e$. Why here and not in the other equations on this line? Also see $S_4$ appearing in the same way on L44.
+
+	I've removed the underscore G.  Probably confusing without adding much.
+
+p7L10: For clarity, how about "give a word" -> "concatenate to give a word"?
+
+	added "concatenates to give a word"
+
+p7L23: "allowed operators" -> "allowed rearrangements"?
+
+	done.
+
+p7L29: Are we really using loops as "shortcuts"? Surely it is more that we are removing loops?
+
+	changed "using loops as shortcuts" to "using loops to identify shortcuts"
+
+p7L40: "reflexive transitive closure". Be kind to the readership of this journal. Please explain what this means and why it is (roughly speaking) necessary to consider.
+
+	ah, really? Can't be bothered.
+
+p9L8: $s_i\in S$?
+
+	done.
+
+p10: Def 5.7. Be kind to the reader here and point out the difference between this def and Def 5.2. See also above comment regarding reflexive transitive closure. Some extra discussion in the text would be helpful here. 
+
+	done.
+
+p10L48: "4 random permutations". It is perhaps suprising that the first chosen random permutations produced differing trees for the three methods! Were these really the first 4 randomly chosen, or did the authors try many until something interesting happened? It would be useful to know if the situation presented is somehow atypical. 
+
+	checking with the team.  Wrote to Sangeeta, Stuart and Attila.
+
+p10L48: "weighted distance matrix". Here do the distances have weights (i.e. as required in weighted neighbour joining, for example) or is this simply an indication that the distance were obtained from the authors method with weighted rearrangements???
+
+	added a rider to say we used the weight function \omega.  Should be clear.
+
+p11: Table 1. Can the authors give *some* indication of how the complexity of the rewriting system increases with n. It is stated that KBMAG is not optimized for finite group. But is there any further theoretical information available?
+
+	haven't addressed this.

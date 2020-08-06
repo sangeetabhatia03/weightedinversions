@@ -1,0 +1,99 @@
+Changes we have made that are not mentioned in reviews:
+
+line 123: we have corrected the action of \pi to be on the right of the position i.
+
+lines 134-139: we have reworded this and fixed some small errors to make it clearer.
+
+
+Reviewer 1
+
+Q1 Please summarize the main findings of the study.
+
+This manuscript addresses the problem of determining the weighted rearrangement distance between two genomes. The authors describe their approach as a "path deformation" in the genome space, where the minimal-distance path corresponds to the one with minimal weight sum. To find the path with minimal distance between the genomes, they construct an initial path between them. Then, this path is modified using a library of "rewriting rules" that was generated when constructing the initial path. Their approach relies on the fact that the set of inversions can be regarded as a rewriting system, and then by the use of the Knuth-Bendix Algorithm can be transformed into a confluent rewriting system (assuming that the rearrangement operators are invertible!). Thus, the path with minimal weight is guaranteed to exist regardless of the initial path and can be found by the Knuth-Bendix algorithm.
+
+	no comment required.
+
+Q2 Please highlight the limitations and strengths.
+
+I think this manuscript presents an interesting framework that can be used to calculate the weighted rearrangement distance. However, it seems their approach so far in only applicable for small examples. They admit that this because of the lack of software that is optimized for the type of tools needed for their approach and also because their approach is only applicable to models involving inversions and translocations but not insertions and deletions. Nonetheless, as a theoretical framework and as a proof of concept, I still think that a revised manuscript is publishable.
+
+	no comment required.
+
+Q3 Please comment on the methods, results and data interpretation. If there are any objective errors, or if the conclusions are not supported, you should detail your concerns.
+
+1. What is the complexity of the approach? Can you comment on the complexity of the Knuth-Bendix Algorithm? Also, is the path with minimal weight unique?
+
+	It is not possible to calculate the complexity of the Knuth--Bendix algorithm because it is a heuristic that is not guaranteed to terminate for all valid inputs [what about finite groups like ours?].  Its termination may be affected by the ordering of the generators, which is not an intrinsic property of the input (a presentation), but rather an ad-hoc choice made when applying Knuth--Bendix.  In particular, the input determines neither the result nor the running time of Knuth--Bendix.
+
+
+	The path with minimal weight will typically not be unique, for example with generators of adjacent transpositions (inversions of two regions), a swap of regions 1 and 3 can be achieved minimally by (12)(23)(12) and by (23)(12)(23).  This is discussed in other papers on these models, especially [Clark et al 2019].
+
+	We have added two short paragraphs explaining these points, towards the end of the Introduction.
+
+
+2. How large is the genome space? This framework was tested only in very short examples (of seven regions?) Would that be a genome with seven genes?
+
+	The genome space grows very rapidly with regions, because the order of the group is n! for n regions, and the symmetries of a circular genome are dihedral (so each genome has 2n equivalent arrangements).  Thus there are n!/2n = (n-1)!/2 circular genomes.  
+
+	Regions do not correspond to genes exactly, but contiguous blocks of DNA that are preserved by the rearrangements.  Typically each such block will contain many genes.
+
+Q4
+[checklist]
+
+Q5 Please provide your detailed review report to the editor and authors (including any comments on the Q4 Check List):
+
+I suggest that the authors address the following comments before publication.
+
+Major Revisions:
+1.	What is the complexity of the approach? Can you comment on the complexity of the Knuth-Bendix Algorithm? Also, is the path with minimal weight unique?
+
+	We have commented on this in response to Q3.
+
+2.	I suggest to change or remove the adjective “flexible” from the title. The way it is described in the manuscript, this framework might not be very flexible as it is only applicable to models involving inversions and translocations but not insertions and deletions. Maybe it could be changed to “A group-theoretic framework for …”.
+
+	The flexibility in the title refers to the ability to adjust weightings on the generators freely, but we have changed this to be more explicit.  
+
+3.	The abstract is not very informative about the approach. It just says that they use the theory of rewriting systems and exploit the Knuth-Bendix algorithm. Adding a brief description of how they use these tools would be helpful.
+
+	We have added an extra sentence to the abstract to describe the use of the tools.
+
+Minor Revisions:
+1.	In line 121, is says “For genomes \pi_1 and pi_2, if there is … such that, where … , and so on”. It seems this statement is incomplete. Were you trying to define something?
+
+	We have edited this to make the statement clear.
+
+2.	What is \Gamma in definition 3.1? It is not described until later in Section 4.
+
+	This is the map that sends a word in the generators to the corresponding group element.  It is in fact defined in the previous section, on the current line 149.
+
+3.	How large is the genome space? This framework was tested only in very short examples (of seven regions?) Would that be a genome with seven genes?
+
+	We have answered this above.
+
+4.	When constructing a library of rules for alternate paths, can you use dynamic programing to find the least weighted path.
+
+	We are not quite sure exactly what is being asked here.  The construction of the confluent set of rewriting rules follows the Knuth--Bendix algorithm, and once it is constructed, the confluence property gives a very direct way to find the least weighted path --- simply apply any sequence of rules that reduce the weight at each step.  It could be that there is a dynamic programming approach to the very construction of the confluent rewriting system, which would in effect be an alternative to using Knuth--Bendix.  That would be a significant result and has perhaps been attempted by others iworking in computational group theory, but is certainly beyond our scope in this paper.
+
+
+Reviewer 2
+
+Q1
+This work uses the theory of rewriting systems for groups, and exploit Knuth-Bendix algorithm.
+
+	no comment required.
+
+Q2
+The limitation is that the connect between the inversion distance and statistics is not clearly explained in the introduction. The strength is that this is the first work to use the theory of rewriting systems to study genome rearrangement problems.
+
+	no comment required.
+
+Q3
+The method is clearly presented. The results and data are reliable.
+
+	no comment required.
+
+Q5
+This work nicely presents how to use the group theory to establish minimal distance for any weighting on the set of inversions. They use the theory of rewriting systems for groups and exploit the Knuth-Bendix algorithm. This is the first work to use group theory for studying genome rearrangement problems. The paper is very well rewritten. The experimental results are clearly presented. I recommend this work for publication.
+
+	no comment required.
+
